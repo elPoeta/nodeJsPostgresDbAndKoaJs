@@ -25,13 +25,28 @@ render(app, {
 
 
 router.get('/doctor', async ctx =>{
+   try{
     const data = await db.viewAll();
     ctx.body = data;
+ 
+}catch(e){
+    ctx.body = `Error ${e}`;
+}
    
 });
 router.get('/doctor/:id', async ctx =>{
-    const data = await db.view(ctx.params.id);
-    ctx.body = data;
+    try{
+        const data = await db.view(ctx.params.id);
+        if(data === !undefined){
+            ctx.body = data;
+        }else {
+            ctx.body = 'Doctor no encontrado';
+        }
+        
+    }catch(e){
+        ctx.body = `Error ${e}`;
+    }
+   
 });;
 //router.get('/', index.home);
 //router.get('/list', index.listado);
