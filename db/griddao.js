@@ -5,10 +5,11 @@ const pool = new Pool({
 });
 
 class DB{
-    static async view(){
+    static async view(id){
+     
         //(async () => {
          try{
-          const  {rows}  = await pool.query('SELECT * FROM doctor WHERE id = $1', [1])
+          const  {rows}  = await pool.query('SELECT * FROM doctor WHERE id = $1', [id]);
           console.log('view() user:', rows[0]);
           return rows[0];
          } 

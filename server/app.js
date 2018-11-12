@@ -14,6 +14,7 @@ const router = new koaRouter();
 //app.use(async ctx => ctx.body = '@elpoeta');
 
 app.use(serve("."));
+//app.use(bodyParser());
 
 render(app, {
     root: path.join(__dirname, 'views'),
@@ -26,7 +27,11 @@ render(app, {
 router.get('/doctor', async ctx =>{
     const data = await db.viewAll();
     ctx.body = data;
-    await db.end();
+   
+});
+router.get('/doctor/:id', async ctx =>{
+    const data = await db.view(ctx.params.id);
+    ctx.body = data;
 });;
 //router.get('/', index.home);
 //router.get('/list', index.listado);
