@@ -23,6 +23,7 @@ render(app, {
     cache: false
 });
 
+router.get('/', ctx =>(ctx.body='@elpoeta HOME..'));
 
 router.get('/doctor', async ctx =>{
    try{
