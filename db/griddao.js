@@ -20,6 +20,7 @@ const client = new Client({
 });
 */
 let pg = require('pg');
+
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = true;
 }
@@ -28,14 +29,14 @@ let connString = process.env.DATABASE_URL || 'postrgresql://elpoeta:elpoeta@loca
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString : connString
+  connectionString : connString,
 });
 class DB{
     static async view(id){
      
-        //(async () => {
+      
          try{
-        //  await client.connect();
+
           const  {rows}  = await pool.query('SELECT * FROM doctor WHERE id = $1', [id]);
           console.log('view() user:', rows[0]);
           return rows[0];
@@ -44,8 +45,7 @@ class DB{
             setImmediate(() => { throw e });
           }
           }
-        //)().catch(e => setImmediate(() => { throw e }))
-      //}
+
       static async viewAll(){
         try{
 

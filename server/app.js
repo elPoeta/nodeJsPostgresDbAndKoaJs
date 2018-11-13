@@ -36,12 +36,14 @@ router.get('/doctor', async ctx =>{
    
 });
 router.get('/doctor/:id', async ctx =>{
+   
     try{
         const data = await db.view(ctx.params.id);
-        if(data === !undefined){
-            ctx.body = data;
+        if(data !== undefined){
+           ctx.body = data;             
         }else {
-            ctx.body = 'Doctor no encontrado';
+            ctx.body = `Doctor con id: ${ctx.params.id} no encontrado`;
+
         }
         
     }catch(e){
