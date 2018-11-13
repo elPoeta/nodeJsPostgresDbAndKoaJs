@@ -1,5 +1,6 @@
 const koa = require('koa');
 const koaRouter = require('koa-router');
+const koaJson = require('koa-json');
 const path = require('path');
 const render = require('koa-ejs');
 const bodyParser = require('koa-bodyparser');
@@ -12,7 +13,7 @@ const app = new koa();
 const router = new koaRouter();
 
 //app.use(async ctx => ctx.body = '@elpoeta');
-
+app.use(koaJson());
 app.use(serve("."));
 //app.use(bodyParser());
 
@@ -50,7 +51,33 @@ router.get('/doctor/:id', async ctx =>{
         ctx.body = `Error ${e}`;
     }
    
-});;
+});
+router.get('/grid', async ctx =>{
+    try{
+     const data = await db.viewAllGrid();
+     ctx.body = data;
+  
+ }catch(e){
+     ctx.body = `Error ${e}`;
+ }
+    
+ });
+router.get('/grid/doctor/:id', async ctx =>{
+   
+    try{
+        const data = await db.viewGridByDoctorId(ctx.params.id);
+        if(data !== undefined){
+           ctx.body = data;             
+        }else {
+            ctx.body = `Grid doctor con id: ${ctx.params.id} no encontrado`;
+
+        }
+        
+    }catch(e){
+        ctx.body = `Error ${e}`;
+    }
+   
+});
 //router.get('/', index.home);
 //router.get('/list', index.listado);
 router.get('/test', ctx =>(ctx.body='@elpoeta Testing..'));

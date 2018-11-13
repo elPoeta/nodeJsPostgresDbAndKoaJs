@@ -57,6 +57,29 @@ class DB{
             setImmediate(() => { throw e });
           }
       }
+
+      static async viewGridByDoctorId(id){
+        try{
+         const  {rows}  = await pool.query('SELECT * FROM grid WHERE doctor_id = $1', [id]);
+         return rows;
+        } 
+         catch(e ){
+           setImmediate(() => { throw e });
+         }
+         }
+
+         static async viewAllGrid(){
+          try{
+  
+            const { rows } = await pool.query('SELECT * FROM grid ');
+          
+            return rows;
+            }
+            catch(e){
+              setImmediate(() => { throw e });
+            }
+        }
+
       static async end(){
         try{
 

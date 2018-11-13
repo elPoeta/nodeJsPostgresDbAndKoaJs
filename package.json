@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server/app.js"
+    "start": "node ./server/app.js",
+    "start-dev": "nodemon ./server/app.js"
   },
   "author": "Leonardo Tosetto",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
     "koa-ejs": "^4.1.2",
+    "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "pg": "^7.6.1"
