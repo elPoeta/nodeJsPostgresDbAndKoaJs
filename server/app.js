@@ -11,7 +11,19 @@ const db = require('../db/griddao');
 
 const app = new koa();
 const router = new koaRouter();
-
+const homePage ={
+    "views": [
+        {"home": "@elpoeta Home test Postgresql page RUTAS...."},
+        {"db":
+            [
+                {"doctor": "/doctor"},
+                {"doctor by id": "/doctor/id"},
+                {"grid": "/grid"},
+                {"grid by doctor id": "/grid/doctor/id"},
+            ]
+        }
+    ]
+};
 //app.use(async ctx => ctx.body = '@elpoeta');
 app.use(koaJson());
 app.use(serve("."));
@@ -24,7 +36,7 @@ render(app, {
     cache: false
 });
 
-router.get('/', ctx =>(ctx.body='@elpoeta HOME..'));
+router.get('/', ctx =>(ctx.body=homePage));
 
 router.get('/doctor', async ctx =>{
    try{
